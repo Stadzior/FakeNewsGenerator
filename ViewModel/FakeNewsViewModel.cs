@@ -8,7 +8,12 @@ namespace FakeNewsGenerator.ViewModel
 {
     public class FakeNewsViewModel : ObservableRecipient
     {
-        public FakeNews? FakeNews { get; set; }
+        private FakeNews? _fakeNews;
+        public FakeNews? FakeNews
+        {
+            get => _fakeNews;
+            set => SetProperty(ref _fakeNews, value);
+        }
 
         public ICommand GenerateFakeNewsCommand { get; set; }
 

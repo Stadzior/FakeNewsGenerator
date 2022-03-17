@@ -1,4 +1,5 @@
-﻿using FakeNewsGenerator.Model;
+﻿using System;
+using FakeNewsGenerator.Model;
 using FakeNewsGenerator.Service.Interfaces;
 
 namespace FakeNewsGenerator.Service
@@ -9,7 +10,7 @@ namespace FakeNewsGenerator.Service
             => new()
             {
                 ImageDescription = "Some, Location",
-                Title = "Some Fake News",
+                Title = $"Some Fake News {new Random().Next()}",
                 Body = "Lorem Ipsum, Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum"
             };
     }
