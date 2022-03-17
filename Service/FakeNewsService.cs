@@ -5,9 +5,12 @@ namespace FakeNewsGenerator.Service
 {
     public class FakeNewsService : IFakeNewsService
     {
-        public FakeNews GenerateFakeNews()
-        {
-            throw new System.NotImplementedException();
-        }
+        public FakeNews GenerateFakeNews() 
+            => new()
+            {
+                ImageDescription = "Some, Location",
+                Title = "Some Fake News",
+                Body = "Lorem Ipsum, Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum"
+            };
     }
 }

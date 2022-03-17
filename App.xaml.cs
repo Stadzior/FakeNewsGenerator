@@ -13,7 +13,9 @@ namespace FakeNewsGenerator
     public partial class App : Application
     {
         public IHost Host { get; set; }
-        public FakeNewsViewModel? FakeNewsViewModel { get; set; }
+
+        public FakeNewsViewModel? FakeNewsViewModel
+            => Host?.Services.GetService<FakeNewsViewModel>();
 
         public App()
         {

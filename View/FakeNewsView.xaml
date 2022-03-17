@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:FakeNewsGenerator.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -11,33 +10,28 @@
     DataContext="{Binding FakeNewsViewModel, Source={x:Static Application.Current}}"
     mc:Ignorable="d">
     <Grid>
+        <Button
+            Width="130"
+            Height="30"
+            Margin="15"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Command="{Binding GenerateFakeNewsCommand}"
+            Content="Generate Fake News" />
         <Image
             Width="256"
             Height="207"
             Margin="10,10,0,0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top" />
-        <TextBox
-            Width="281"
-            Height="36"
-            Margin="29,257,0,0"
-            HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            FontSize="20"
-            FontWeight="Bold"
-            Text="TextBox"
-            TextWrapping="Wrap">
-            <TextBox.BorderBrush>
-                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
-            </TextBox.BorderBrush>
-        </TextBox>
+            Source="{Binding FakeNews.Image}" />
         <TextBox
             Width="272"
             Height="26"
             Margin="10,226,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="TextBox"
+            Text="{Binding FakeNews.ImageDescription}"
             TextWrapping="Wrap">
             <TextBox.Foreground>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowFrameColorKey}}" />
@@ -46,13 +40,27 @@
                 <SolidColorBrush Color="White" />
             </TextBox.BorderBrush>
         </TextBox>
+        <TextBox
+            Width="281"
+            Height="36"
+            Margin="29,257,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="20"
+            FontWeight="Bold"
+            Text="{Binding FakeNews.Title}"
+            TextWrapping="Wrap">
+            <TextBox.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+            </TextBox.BorderBrush>
+        </TextBox>
         <TextBlock
             Width="724"
             Height="104"
             Margin="29,298,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="TextBlock"
+            Text="{Binding FakeNews.Body}"
             TextWrapping="Wrap" />
     </Grid>
 </UserControl>
