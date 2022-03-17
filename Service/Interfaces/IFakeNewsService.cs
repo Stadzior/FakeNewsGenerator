@@ -1,9 +1,10 @@
-﻿using FakeNewsGenerator.Model;
+﻿using System.Threading.Tasks;
+using FakeNewsGenerator.Model;
 
 namespace FakeNewsGenerator.Service.Interfaces
 {
     public interface IFakeNewsService
     {
-        public FakeNews GenerateFakeNews();
+        public Task<FakeNews> GenerateFakeNewsAsync();
     }
 }

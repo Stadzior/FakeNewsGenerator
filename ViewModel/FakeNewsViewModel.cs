@@ -19,8 +19,7 @@ namespace FakeNewsGenerator.ViewModel
 
         public FakeNewsViewModel(IFakeNewsService service)
         {
-            FakeNews = service.GenerateFakeNews();
-            GenerateFakeNewsCommand = new RelayCommand(() => FakeNews = service.GenerateFakeNews());
+            GenerateFakeNewsCommand = new RelayCommand(async () => FakeNews = await service.GenerateFakeNewsAsync());
         }
     }
 }

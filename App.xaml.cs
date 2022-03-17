@@ -2,6 +2,7 @@
 using FakeNewsGenerator.Service;
 using FakeNewsGenerator.Service.Interfaces;
 using FakeNewsGenerator.ViewModel;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -19,11 +20,17 @@ namespace FakeNewsGenerator
 
         public App()
         {
+            var accessKey = new ConfigurationBuilder()
+                .AddJsonFile("apiConfig.json")
+                .Build()
+                .GetSection("Configuration")
+                .GetValue<string>("AccessKey");
+
             Host = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder()
                 .ConfigureServices(services =>
                 {
                     services.AddSingleton<MainWindow>();
-                    services.AddSingleton<IFakeNewsService, FakeNewsService>();
+                    services.AddSingleton<IFakeNewsService, FakeNewsService>(_ => new FakeNewsService(accessKey));
                     services.AddSingleton<FakeNewsViewModel>();
                 }).Build();
         }
