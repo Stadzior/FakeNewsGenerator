@@ -1,0 +1,22 @@
+﻿{
+  "Serilog": {
+    "Using": [],
+    "Enrich": [
+      "WithMachineName",
+      "WithThreadId"
+    ],
+    "WriteTo": [
+      {
+        "Name": "Console"
+      },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "FakeNewsGenerator.log",
+          "outputTemplate": "{Timestamp: G} [{Level}] {Message}",
+          "rollingInterval": "Day"
+        }
+      }
+    ]
+  } 
+}

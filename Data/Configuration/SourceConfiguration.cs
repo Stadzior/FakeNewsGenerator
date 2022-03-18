@@ -9,7 +9,7 @@ public class SourceConfiguration : IEntityTypeConfiguration<Source>
     public virtual void Configure(EntityTypeBuilder<Source> builder)
     {
         builder
-            .ToTable("Reason");
+            .ToTable("Source");
 
         builder
             .HasKey(reason => reason.Id);

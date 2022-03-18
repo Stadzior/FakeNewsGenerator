@@ -12,7 +12,7 @@ public class FakeNewsContext : DbContext
     public virtual DbSet<Reason> Reasons { get; set; }
     public virtual DbSet<Source> Sources { get; set; }
 
-    public FakeNewsContext(DbContextOptions<FakeNewsContext> options) : base(options) {}
+    public FakeNewsContext(DbContextOptions<FakeNewsContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -22,7 +22,5 @@ public class FakeNewsContext : DbContext
         new ActionConfiguration().Configure(modelBuilder.Entity<Action>());
         new ReasonConfiguration().Configure(modelBuilder.Entity<Reason>());
         new SourceConfiguration().Configure(modelBuilder.Entity<Source>());
-
-        //Data Seeds
     }
 }

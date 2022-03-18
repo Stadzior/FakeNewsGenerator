@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FakeNewsGenerator.Data.Configuration;
 
-public class ActorConfiguration
+public class ActorConfiguration : IEntityTypeConfiguration<Actor>
 {
     public virtual void Configure(EntityTypeBuilder<Actor> builder)
     {
         builder
-            .ToTable("Action");
+            .ToTable("Actor");
 
         builder
             .HasKey(actor => actor.Id);

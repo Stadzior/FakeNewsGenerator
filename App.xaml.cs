@@ -1,10 +1,13 @@
 ﻿using System.Windows;
+using FakeNewsGenerator.Data;
 using FakeNewsGenerator.Service;
 using FakeNewsGenerator.Service.Interfaces;
 using FakeNewsGenerator.ViewModel;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace FakeNewsGenerator;
 
@@ -20,19 +23,35 @@ public partial class App : Application
 
     public App()
     {
-        var accessKey = new ConfigurationBuilder()
+        var configuration = new ConfigurationBuilder()
             .AddJsonFile("apiConfig.json")
-            .Build()
+            .Build();
+
+        var accessKey = configuration
             .GetSection("Configuration")
             .GetValue<string>("AccessKey");
 
+        var connectionString = configuration
+            .GetConnectionString("FakeNewsContext");
+
         Host = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder()
+            .UseSerilog()
             .ConfigureServices(services =>
             {
+                services.AddDbContextFactory<FakeNewsContext>(options => options.UseSqlServer(connectionString));
                 services.AddSingleton<MainWindow>();
-                services.AddSingleton<IFakeNewsService, FakeNewsService>(_ => new FakeNewsService(accessKey));
+                services.AddSingleton<IFakeNewsService, FakeNewsService>(provider => new FakeNewsService(accessKey, provider.GetService<IDbContextFactory<FakeNewsContext>>()!));
                 services.AddSingleton<FakeNewsViewModel>();
             }).Build();
+
+        var logConfiguration = new ConfigurationBuilder()
+            .AddJsonFile("logConfig.json")
+            .Build();
+
+        Log.Logger = new LoggerConfiguration()
+            .ReadFrom
+            .Configuration(logConfiguration)
+            .CreateLogger();
     }
 
     protected override void OnStartup(StartupEventArgs args)
